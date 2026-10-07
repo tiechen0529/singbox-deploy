@@ -80,8 +80,7 @@ prompt_socks() {
     [[ "$server_port" =~ ^[0-9]+$ ]] && [ "$server_port" -ge 1 ] && [ "$server_port" -le 65535 ] || { err "SOCKS 端口必须为 1-65535"; return 1; }
     read -r -p 'SOCKS 用户名 username: ' username
     [ -n "$username" ] || { err "SOCKS 用户名不能为空"; return 1; }
-    read -r -s -p 'SOCKS 密码 password: ' password
-    echo
+    read -r -p 'SOCKS 密码明文 (只输入密码本身，不要输入 password: 等字段): ' password
     [ -n "$password" ] || { err "SOCKS 密码不能为空"; return 1; }
     SOCKS_TAG="socks-${tag#vless-}"
     SOCKS_JSON=$(jq -n --arg tag "$SOCKS_TAG" --arg server "$server" --arg username "$username" --arg password "$password" --argjson port "$server_port" '{type:"socks",tag:$tag,server:$server,server_port:$port,username:$username,password:$password}')
@@ -175,8 +174,7 @@ prompt_socks() {
     [[ "$server_port" =~ ^[0-9]+$ ]] && [ "$server_port" -ge 1 ] && [ "$server_port" -le 65535 ] || { err "SOCKS 端口必须为 1-65535"; return 1; }
     read -r -p 'SOCKS 用户名 username: ' username
     [ -n "$username" ] || { err "SOCKS 用户名不能为空"; return 1; }
-    read -r -s -p 'SOCKS 密码 password: ' password
-    echo
+    read -r -p 'SOCKS 密码明文 (只输入密码本身，不要输入 password: 等字段): ' password
     [ -n "$password" ] || { err "SOCKS 密码不能为空"; return 1; }
     SOCKS_TAG="socks-${tag#vless-}"
     SOCKS_JSON=$(jq -n --arg tag "$SOCKS_TAG" --arg server "$server" --arg username "$username" --arg password "$password" --argjson port "$server_port" '{type:"socks",tag:$tag,server:$server,server_port:$port,username:$username,password:$password}')
